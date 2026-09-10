@@ -1,11 +1,9 @@
-// انسخ إعدادات Firebase Web App هنا.
-// Firebase Console > Project settings > Your apps > Web app
 export const firebaseConfig = {
-  apiKey: "PASTE_API_KEY_HERE",
-  authDomain: "PASTE_PROJECT_ID.firebaseapp.com",
-  databaseURL: "https://PASTE_DATABASE_URL_HERE",
-  projectId: "PASTE_PROJECT_ID",
-  storageBucket: "PASTE_PROJECT_ID.firebasestorage.app",
-  messagingSenderId: "PASTE_MESSAGING_SENDER_ID",
-  appId: "PASTE_APP_ID"
+  apiKey: "AIzaSyAYXepGT-er3s8XvPsFEvuOuwyW05ZPX4",
+  authDomain: "fahad-math-battle.firebaseapp.com",
+  databaseURL: "https://fahad-math-battle-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "fahad-math-battle",
+  storageBucket: "fahad-math-battle.firebasestorage.app",
+  messagingSenderId: "208111433981",
+  appId: "1:208111433981:web:87293c97a2927e5f812694"
 };
