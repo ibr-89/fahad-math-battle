@@ -16,7 +16,7 @@ import {
   runTransaction,
   serverTimestamp
 } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-database.js";
-import { firebaseConfig } from "./firebase-config.js";
+import { firebaseConfig } from "./firebase-config.js?v=3";
 
 const $ = (s) => document.querySelector(s);
 const $$ = (s) => [...document.querySelectorAll(s)];
