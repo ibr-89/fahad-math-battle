@@ -1,0 +1,26 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+    "rooms": {
+      "$pin": {
+        ".read": "auth != null",
+        ".write": "auth != null && ((!data.exists() && newData.child('hostUid').val() === auth.uid) || data.child('hostUid').val() === auth.uid)",
+        "players": {
+          "$uid": {
+            ".write": "auth != null && (root.child('rooms').child($pin).child('hostUid').val() === auth.uid || (auth.uid === $uid && (!newData.exists() || (!data.exists() && newData.child('score').val() === 0 && newData.child('correct').val() === 0 && newData.child('connected').val() === true) || (data.exists() && newData.child('name').val() === data.child('name').val() && newData.child('avatar').val() === data.child('avatar').val() && newData.child('score').val() === data.child('score').val() && newData.child('correct').val() === data.child('correct').val() && newData.child('joinedAt').val() === data.child('joinedAt').val()))))",
+            ".validate": "!newData.exists() || (newData.hasChildren(['name','avatar','score','correct','connected','joinedAt','lastSeen']) && newData.child('name').isString() && newData.child('name').val().length > 0 && newData.child('name').val().length <= 20 && newData.child('avatar').isString() && newData.child('avatar').val().matches(/^(scientist|inventor|robot|astronaut|chess|detective|coder|knowledge)$/) && newData.child('score').isNumber() && newData.child('score').val() >= 0 && newData.child('correct').isNumber() && newData.child('correct').val() >= 0 && newData.child('connected').isBoolean() && newData.child('joinedAt').isNumber() && newData.child('lastSeen').isNumber())"
+          }
+        },
+        "answers": {
+          "$questionIndex": {
+            "$uid": {
+              ".write": "auth != null && auth.uid === $uid && newData.exists() && !data.exists() && root.child('rooms').child($pin).child('status').val() === 'playing' && root.child('rooms').child($pin).child('phase').val() === 'question' && $questionIndex === root.child('rooms').child($pin).child('currentQuestionIndex').val() + '' && now <= root.child('rooms').child($pin).child('questionStartedAt').val() + (root.child('rooms').child($pin).child('settings').child('seconds').val() * 1000) + 1500",
+              ".validate": "newData.hasChildren(['value','elapsedMs','submittedAt']) && newData.child('value').isNumber() && newData.child('value').val() >= 0 && newData.child('value').val() <= 999 && newData.child('elapsedMs').isNumber() && newData.child('elapsedMs').val() >= 0 && newData.child('elapsedMs').val() <= (root.child('rooms').child($pin).child('settings').child('seconds').val() * 1000) + 800 && newData.child('submittedAt').isNumber()"
+            }
+          }
+        }
+      }
+    }
+  }
+}
