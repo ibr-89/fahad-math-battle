@@ -1093,8 +1093,17 @@ async function replayGame(){
 
 $("#finalReplayBtn").addEventListener("click",replayGame);
 
-const urlPin=new URLSearchParams(location.search).get("pin");
-if(urlPin && /^\d{6}$/.test(urlPin)){
-  $("#joinPin").value=urlPin;
-  showView("joinView");
+const urlPin = new URLSearchParams(location.search).get("pin");
+
+if (urlPin && /^\d{6}$/.test(urlPin)) {
+  $("#joinPin").value = urlPin;
+
+  const savedSession = readSession();
+  const isHostResume =
+    savedSession?.role === "host" &&
+    String(savedSession?.pin || "") === String(urlPin);
+
+  if (!isHostResume) {
+    showView("joinView");
+  }
 }
